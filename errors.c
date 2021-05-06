@@ -20,7 +20,7 @@ int	inv_args_error(void)
 
 int	file_not_found_error(void)
 {
-	ft_putstr("Error: file not found or error with reading file!\n");
+	ft_putstr("Error: invalid filename or error with reading file!\n");
 	return (0);
 }
 

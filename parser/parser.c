@@ -96,7 +96,7 @@ int	parser(t_params *params)
 
 	line = NULL;
 	fd = open(params->filename, O_RDONLY);
-	if (fd < 0)
+	if (fd < 0 || check_filename(params) < 0)
 		return (-3);
 	b = get_next_line(fd, &line);
 	while (b != 0)

@@ -69,6 +69,7 @@ typedef struct s_sprites
 typedef struct s_params
 {
 	char		*filename;
+	char		*ext;
 	int			save;
 	int			rx;
 	int			ry;
@@ -134,6 +135,7 @@ int				inv_args_error(void);
 int				file_not_found_error(void);
 int				inv_config_file(void);
 int				malloc_error(void);
+int				check_filename(t_params *params);
 t_params		*params_init(void);
 int				parser(t_params *params);
 int				parser_checks(t_params *params, int fd, char *line);

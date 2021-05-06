@@ -48,6 +48,15 @@ int	win_close(t_params *params)
 	exit(0);
 }
 
+int	check_filename(t_params *params)
+{
+	params->ext = ft_substr(params->filename, ft_strlen(params->filename) - 4,
+			4);
+	if (ft_strcmp(params->ext, ".cub") != 0)
+		return (-3);
+	return (0);
+}
+
 int	main(int ac, char **av)
 {
 	t_params	*params;

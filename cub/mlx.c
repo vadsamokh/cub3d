@@ -26,7 +26,6 @@ int	window(t_params *params)
 		params->rx = x;
 	if (y < params->ry)
 		params->ry = y;
-	params->win = mlx_new_window(params->mlx, params->rx, params->ry, "cub3D");
 	a = load_textures(params);
 	if (a < 0)
 		return (a);
@@ -36,6 +35,8 @@ int	window(t_params *params)
 	image(params);
 	if (params->save == 1)
 		make_screenshot(params);
+	params->win = mlx_new_window(params->mlx, params->rx, params->ry, "cub3D");
+	mlx_put_image_to_window(params->mlx, params->win, params->img.img, 0, 0);
 	loops_hooks(params);
 	return (0);
 }
@@ -64,6 +65,8 @@ int	engine(t_params *params)
 	{
 		mlx_destroy_image(params->mlx, params->img.img);
 		image(params);
+		mlx_put_image_to_window(params->mlx, params->win, params->img.img,
+			0, 0);
 		flag = 0;
 	}
 	return (0);
@@ -79,7 +82,6 @@ void	image(t_params *params)
 	floor_ceiling(&params->img, params);
 	new_ray0(&params->img, params);
 	draw_sprites(&params->img, params);
-	mlx_put_image_to_window(params->mlx, params->win, params->img.img, 0, 0);
 }
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
