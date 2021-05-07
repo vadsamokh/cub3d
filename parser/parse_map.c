@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	parse_map(int fd, char *line, t_params *params)
 {

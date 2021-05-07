@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	load_sprite_tex(t_params *params)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	write_param(char **spl, t_params *params)
 {

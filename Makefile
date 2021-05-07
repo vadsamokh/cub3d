@@ -1,4 +1,4 @@
-.PHONY:	re all clean fclen
+.PHONY:	re all clean fclean
 
 NAME =	cub3D
 
@@ -40,6 +40,11 @@ OBJS =	./main.o \
 		./sprites_utils.o \
 		./screenshot.o
 
+INCLUDES =	./headers
+
+LIBRARIES =	./libft.a \
+			./libmlx.dylib
+
 all:	${NAME}
 
 ${NAME}:
@@ -47,7 +52,7 @@ ${NAME}:
 		cp ./libft/libft.a .
 		make -C ./minilibx_mms_20200219/
 		cp ./minilibx_mms_20200219/libmlx.dylib .
-		gcc ${SRCS} -o ${NAME} -L. -I. libft.a libmlx.dylib -framework OpenGL -framework Appkit -O2
+		gcc ${SRCS} -o ${NAME} -Wall -Wextra -Werror -L. -I ${INCLUDES} ${LIBRARIES} -framework OpenGL -framework Appkit -O2
 
 clean:
 		$(MAKE) clean -C ./libft/
@@ -55,8 +60,7 @@ clean:
 		rm -f ${OBJS}
 
 fclean:	clean
-		rm -f libft.a
-		rm -f libmlx.dylib
+		rm -f ${LIBRARIES}
 		rm -f ${NAME}
 
 re:		fclean all

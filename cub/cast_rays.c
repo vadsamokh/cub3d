@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 void	new_ray0(t_data *img, t_params *params)
 {

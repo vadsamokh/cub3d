@@ -15,28 +15,26 @@
 
 # include <fcntl.h>
 # include <math.h>
-# include "./../libft/libft.h"
-# include "./../minilibx_mms_20200219/mlx.h"
+# include "libft.h"
+# include "mlx.h"
 
 # define ESC 53
 # define W 13
 # define A 0
 # define S 1
 # define D 2
+# define LEFT 123
+# define RIGHT 124
 # define TURN 0.04
 # define SCL 10
 
-typedef struct	s_frame
+typedef struct s_bmp
 {
-	uint8_t		flag;
-	uint8_t		bfh[14];
-	uint8_t		bih[40];
-	uint32_t	count;
-	uint32_t	size_of_file;
-	uint8_t		fd;
-	uint32_t	length;
-
-}				t_frame;
+	unsigned char	hdr[54];
+	unsigned int	count;
+	unsigned int	size;
+	unsigned int	length;
+}				t_bmp;
 
 typedef struct s_data {
 	void		*img;
@@ -91,7 +89,7 @@ typedef struct s_params
 	int			map_y;
 	void		*mlx;
 	void		*win;
-	t_frame		screenshot;
+	t_bmp		screenshot;
 	t_data		img;
 	int			first_img_flag;
 	double		pos_x;
@@ -102,6 +100,8 @@ typedef struct s_params
 	int			flagA;
 	int			flagS;
 	int			flagD;
+	int			flagL;
+	int			flagR;
 	double		curr_ray;
 	t_data		tex[5];
 	int			sprite_ct;
@@ -137,6 +137,7 @@ int				inv_config_file(void);
 int				malloc_error(void);
 int				check_filename(t_params *params);
 t_params		*params_init(void);
+void			init_move_flags(t_params *params);
 int				parser(t_params *params);
 int				parser_checks(t_params *params, int fd, char *line);
 int				params_work(char *line, t_params *params);
@@ -165,8 +166,7 @@ int				check3(t_params *params);
 void			player_init(int pos_x, int pos_y, char dir, t_params *params);
 int				window(t_params *params);
 void			make_screenshot(t_params *params);
-void			bmp_meta_info(t_params *params);
-void			screenshot_recording(t_params *params);
+void			bmp_header(t_params *params);
 void			loops_hooks(t_params *params);
 int				engine(t_params *params);
 void			image(t_params *params);

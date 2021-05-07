@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/cub3d.h"
+#include "cub3d.h"
 
 t_params	*params_init(void)
 {
@@ -34,11 +34,18 @@ t_params	*params_init(void)
 	params->cr = -1;
 	params->cg = -1;
 	params->cb = -1;
+	init_move_flags(params);
+	return (params);
+}
+
+void	init_move_flags(t_params *params)
+{
 	params->flagW = 0;
 	params->flagA = 0;
 	params->flagS = 0;
 	params->flagD = 0;
-	return (params);
+	params->flagL = 0;
+	params->flagR = 0;
 }
 
 int	win_close(t_params *params)

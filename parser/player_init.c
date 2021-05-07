@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	check3(t_params *params)
 {
@@ -43,30 +43,16 @@ int	check3(t_params *params)
 void	player_init(int pos_x, int pos_y, char dir, t_params *params)
 {
 	params->fov = M_PI / 3;
+	params->pos_x = pos_x + (int)(SCL / 2);
+	params->pos_y = pos_y + (int)(SCL / 2);
 	if (dir == 'N')
-	{
-		params->pos_x = pos_x + (int)(SCL / 2);
-		params->pos_y = pos_y + (int)(SCL / 2);
 		params->dir = -M_PI / 2;
-	}
 	if (dir == 'S')
-	{
-		params->pos_x = pos_x + (int)(SCL / 2);
-		params->pos_y = pos_y + (int)(SCL / 2);
 		params->dir = M_PI / 2;
-	}
 	if (dir == 'E')
-	{
-		params->pos_x = pos_x + (int)(SCL / 2);
-		params->pos_y = pos_y + (int)(SCL / 2);
 		params->dir = 0;
-	}
 	if (dir == 'W')
-	{
-		params->pos_x = pos_x + (int)(SCL / 2);
-		params->pos_y = pos_y + (int)(SCL / 2);
 		params->dir = M_PI;
-	}
 }
 
 int	parser_checks(t_params *params, int fd, char *line)

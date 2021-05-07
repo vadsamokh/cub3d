@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	window(t_params *params)
 {
@@ -56,7 +56,7 @@ int	engine(t_params *params)
 
 	flag = 0;
 	if (params->flagW == 1 || params->flagA == 1 || params->flagS == 1
-		|| params->flagD == 1)
+		|| params->flagD == 1 || params->flagL == 1 || params->flagR == 1)
 	{
 		flag = 1;
 		move(params);

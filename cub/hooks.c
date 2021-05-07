@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	move(t_params *params)
 {
@@ -22,9 +22,17 @@ int	move(t_params *params)
 		params->pos_x -= cos(params->dir);
 	if (params->flagS == 1 && check_pos_y(params) == 0)
 		params->pos_y -= sin(params->dir);
-	if (params->flagA == 1)
+	if (params->flagA == 1 && check_pos_x(params) == 0)
+		params->pos_x += sin(params->dir);
+	if (params->flagA == 1 && check_pos_y(params) == 0)
+		params->pos_y -= cos(params->dir);
+	if (params->flagD == 1 && check_pos_x(params) == 0)
+		params->pos_x -= sin(params->dir);
+	if (params->flagD == 1 && check_pos_y(params) == 0)
+		params->pos_y += cos(params->dir);
+	if (params->flagL == 1)
 		params->dir -= TURN;
-	if (params->flagD == 1)
+	if (params->flagR == 1)
 		params->dir += TURN;
 	return (0);
 }
@@ -36,6 +44,12 @@ int	check_pos_x(t_params *params)
 		return (-1);
 	if (params->flagS == 1 && ((params->map)[(int)floor(params->pos_y / SCL)]
 		[(int)floor((params->pos_x - 2 * cos(params->dir)) / SCL)] == '1'))
+		return (-1);
+	if (params->flagA == 1 && ((params->map)[(int)floor(params->pos_y / SCL)]
+		[(int)floor((params->pos_x + 2 * sin(params->dir)) / SCL)] == '1'))
+		return (-1);
+	if (params->flagD == 1 && ((params->map)[(int)floor(params->pos_y / SCL)]
+		[(int)floor((params->pos_x - 2 * sin(params->dir)) / SCL)] == '1'))
 		return (-1);
 	return (0);
 }
@@ -50,6 +64,14 @@ int	check_pos_y(t_params *params)
 				* sin(params->dir)) / SCL)]
 				[(int)floor(params->pos_x / SCL)] == '1')
 		return (-1);
+	if (params->flagA == 1 && (params->map)[(int)floor((params->pos_y - 2
+				* cos(params->dir)) / SCL)]
+				[(int)floor(params->pos_x / SCL)] == '1')
+		return (-1);
+	if (params->flagD == 1 && (params->map)[(int)floor((params->pos_y + 2
+				* cos(params->dir)) / SCL)]
+				[(int)floor(params->pos_x / SCL)] == '1')
+		return (-1);
 	return (0);
 }
 
@@ -61,6 +83,10 @@ int	keypress(int keycode, t_params *params)
 		params->flagW = 1;
 	if (keycode == S && params->flagW == 0)
 		params->flagS = 1;
+	if (keycode == LEFT && params->flagR == 0)
+		params->flagL = 1;
+	if (keycode == RIGHT && params->flagL == 0)
+		params->flagR = 1;
 	if (keycode == A && params->flagD == 0)
 		params->flagA = 1;
 	if (keycode == D && params->flagA == 0)
@@ -78,5 +104,9 @@ int	keyrelease(int keycode, t_params *params)
 		params->flagA = 0;
 	if (keycode == D)
 		params->flagD = 0;
+	if (keycode == LEFT)
+		params->flagL = 0;
+	if (keycode == RIGHT)
+		params->flagR = 0;
 	return (0);
 }

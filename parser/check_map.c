@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./../headers/cub3d.h"
+#include "cub3d.h"
 
 int	check_map(t_params *params)
 {
@@ -43,7 +43,7 @@ int	find_length(int y, char **map)
 	i = 0;
 	while (i < y)
 	{
-		if (ft_strlen(map[i]) > x)
+		if (ft_strlen(map[i]) > (size_t)x)
 			x = ft_strlen(map[i]);
 		i++;
 	}
