@@ -49,25 +49,26 @@ int	load_textures(t_params *params)
 {
 	params->tex[0].img = mlx_xpm_file_to_image(params->mlx, params->no,
 			&(params->tex[0].img_width), &(params->tex[0].img_height));
+	params->tex[1].img = mlx_xpm_file_to_image(params->mlx, params->so,
+			&(params->tex[1].img_width), &(params->tex[1].img_height));
+	params->tex[2].img = mlx_xpm_file_to_image(params->mlx, params->we,
+			&(params->tex[2].img_width), &(params->tex[2].img_height));
+	params->tex[3].img = mlx_xpm_file_to_image(params->mlx, params->ea,
+			&(params->tex[3].img_width), &(params->tex[3].img_height));
+	error_textures(params);
 	params->tex[0].addr = mlx_get_data_addr(params->tex[0].img,
 			&(params->tex[0].bits_per_pixel), &(params->tex[0].line_length),
 			&(params->tex[0].endian));
-	params->tex[1].img = mlx_xpm_file_to_image(params->mlx, params->so,
-			&(params->tex[1].img_width), &(params->tex[1].img_height));
 	params->tex[1].addr = mlx_get_data_addr(params->tex[1].img,
 			&(params->tex[1].bits_per_pixel), &(params->tex[1].line_length),
 			&(params->tex[1].endian));
-	params->tex[2].img = mlx_xpm_file_to_image(params->mlx, params->we,
-			&(params->tex[2].img_width), &(params->tex[2].img_height));
 	params->tex[2].addr = mlx_get_data_addr(params->tex[2].img,
 			&(params->tex[2].bits_per_pixel), &(params->tex[2].line_length),
 			&(params->tex[2].endian));
-	params->tex[3].img = mlx_xpm_file_to_image(params->mlx, params->ea,
-			&(params->tex[3].img_width), &(params->tex[3].img_height));
 	params->tex[3].addr = mlx_get_data_addr(params->tex[3].img,
 			&(params->tex[3].bits_per_pixel), &(params->tex[3].line_length),
 			&(params->tex[3].endian));
-	return (error_textures(params));
+	return (0);
 }
 
 int	error_textures(t_params *params)
@@ -75,9 +76,9 @@ int	error_textures(t_params *params)
 	if (params->tex[0].img == NULL || params->tex[1].img == NULL
 		|| params->tex[2].img == NULL || params->tex[3].img == NULL)
 	{
-		mlx_destroy_window(params->mlx, params->win);
 		free(params->mlx);
-		return (-2);
+		file_not_found_error();
+		exit(0);
 	}
 	return (0);
 }

@@ -16,7 +16,6 @@ int	window(t_params *params)
 {
 	int		x;
 	int		y;
-	int		a;
 
 	params->mlx = mlx_init();
 	if (params->mlx == NULL)
@@ -26,12 +25,8 @@ int	window(t_params *params)
 		params->rx = x;
 	if (y < params->ry)
 		params->ry = y;
-	a = load_textures(params);
-	if (a < 0)
-		return (a);
-	a = load_sprite_tex(params);
-	if (a < 0)
-		return (a);
+	load_textures(params);
+	load_sprite_tex(params);
 	image(params);
 	if (params->save == 1)
 		make_screenshot(params);

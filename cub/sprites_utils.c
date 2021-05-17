@@ -16,15 +16,15 @@ int	load_sprite_tex(t_params *params)
 {
 	params->tex[4].img = mlx_xpm_file_to_image(params->mlx, params->spr_addr,
 			&(params->tex[4].img_width), &(params->tex[4].img_height));
+	if (params->tex[4].img == NULL)
+	{
+		free(params->mlx);
+		file_not_found_error();
+		exit(0);
+	}
 	params->tex[4].addr = mlx_get_data_addr(params->tex[4].img,
 			&(params->tex[4].bits_per_pixel), &(params->tex[4].line_length),
 			&(params->tex[4].endian));
-	if (params->tex[4].img == NULL)
-	{
-		mlx_destroy_window(params->mlx, params->win);
-		free(params->mlx);
-		return (-2);
-	}
 	return (0);
 }
 
